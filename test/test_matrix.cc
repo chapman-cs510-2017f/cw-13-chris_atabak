@@ -26,7 +26,7 @@ int main() {
     mat3.print();
     std::cout<<std::endl;
     Matrix<long double> mat4 = mat1 + mat2;
-    mat3 + 10.0;
+    mat4 = mat3 + 10.0;
     mat4.print();
     mat4.save("test.csv");
     return 0;
