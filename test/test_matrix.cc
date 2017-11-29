@@ -2,7 +2,6 @@
 #include "../src/matrix/matrix.h"
 
 int main() {
-    unsigned int i, j;
     // Define two 10x10 matrices with element types of long double
     // The first has all elements set to 1.0
     Matrix<long double> mat1(10, 10, 1.0);
@@ -15,14 +14,20 @@ int main() {
   
     // Define a third matrix as the sum of the first two
     Matrix<long double> mat3 = mat1 + mat2;
-  
-    // Print out the third matrix as a text array
-    for (i=0; i<mat3.get_rows(); i++) {
-        for (j=0; j<mat3.get_cols(); j++) {
-            std::cout << mat3(i,j) << "\t";
-        }
-        std::cout << std::endl;
-    }
-  
+    // Print using Print method
+    mat1.print();
+    std::cout<<std::endl;
+    mat2.print();
+    std::cout<<std::endl;
+   
+    //* operator overloading
+    
+    mat3 = mat1*mat2;
+    mat3.print();
+    std::cout<<std::endl;
+    Matrix<long double> mat4 = mat1 + mat2;
+    mat3 + 10.0;
+    mat4.print();
+    mat4.save("test.csv");
     return 0;
 }

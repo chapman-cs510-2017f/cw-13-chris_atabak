@@ -5,7 +5,7 @@
 // Seasoned C++ programmers swear by this data structure
 // as the swiss-army-knife that one should almost always use
 #include <vector>
-
+#include <string>
 // A template allows an arbitrary type T to be passed into a class as a
 // parameter, so a single class definition can apply to different types 
 template <typename T> class Matrix {
@@ -37,6 +37,12 @@ template <typename T> class Matrix {
         // Addition + operator between matrices
         Matrix<T> operator+(const Matrix<T>& rhs);
     
+        // multiplication * operator between matrices
+        Matrix<T> operator*(const Matrix<T>& rhs);
+    
+        // Addition of scalar to matrix
+        Matrix<T> operator+(long double val);
+    
         // Selection operator (i,j) to access elements
         T& operator()(const unsigned int &row, const unsigned int &col);
         const T& operator()(const unsigned int &row, const unsigned int &col) const;
@@ -44,7 +50,9 @@ template <typename T> class Matrix {
         // Accessor methods for row and column sizes
         unsigned int get_rows() const;
         unsigned int get_cols() const;
-  
+        
+        void print();
+        void save(std::string filename);
 };
 
 

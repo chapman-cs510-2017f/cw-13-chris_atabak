@@ -4,7 +4,8 @@
 
 // include the header declarations
 #include "matrix.h"
-
+#include <iostream>
+#include <fstream>
 //*************
 //
 // CONSTRUCTORS
@@ -130,7 +131,28 @@ unsigned int Matrix<T>::get_cols() const {
     return this->cols;
 }
 
+template<typename T>
+void Matrix<T>::print(){
+  for (unsigned int i=0; i<this->get_rows(); i++) {
+      for (unsigned int j=0; j<this->get_cols(); j++) {
+          std::cout <<this->mat[i][j] << "\t";
+      }
+      std::cout << std::endl;
+  }
+}
 
+template<typename T>
+void Matrix<T>::save(std::string filename){
+    std::ofstream myfile;
+    myfile.open (filename);
+     for (unsigned int j=0; j<rows; j++) {
+        for (unsigned int i=0; i<cols; i++) {
+           myfile <<this->mat[i][j]<<",";
+        }
+         myfile <<"\n";
+    }
+    myfile.close();
+}
 
 //*********************
 //
@@ -154,5 +176,40 @@ Matrix<T> Matrix<T>::operator+(const Matrix<T>& rhs) {
   
     return result;
 }
+// multiplication
+template<typename T>
+Matrix<T> Matrix<T>::operator*(const Matrix<T>& rhs) {
+    // Create new matrix to store result, initialize to zero
+    Matrix<T> result(rows, rhs.get_cols(), (T)0.0);
+    
+    // Add each matrix element-by-element
+    for (unsigned int i=0; i<rows; i++) {
+        for (unsigned int j=0; j<rhs.get_cols(); j++) {
+          int sum = 0;
+          for( unsigned int k=0; k< cols; k++){
+            sum = sum + this->mat[i][k] * rhs(k,j);
+          }
+            result(i,j) = sum;
+        }
+    }
+
+    return result;
+}
+
+
+// Addition of scalar to matrix
+template<typename T>
+Matrix<T> Matrix<T>::operator+(long double val){
+     Matrix<T> result(rows, cols, (T)0.0);
+        // Add each matrix element-by-element
+    for (unsigned int i=0; i<rows; i++) {
+        for (unsigned int j=0; j<cols; j++) {
+            result(i,j) = this->mat[i][j] + val;
+        }
+    }
+
+    return result;
+}
+
 
 #endif // CW13_MATRIX_CPP_
