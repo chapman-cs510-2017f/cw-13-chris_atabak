@@ -1,5 +1,31 @@
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
+#include "matrix.h"
+
+
+void create_plane(long double xmin, long double xmax, int xlen, long double ymin, long double ymax, int ylen);
+
+// Get number of rows
+template<typename T>
+unsigned int Matrix<T>::get_rows() const {
+    return this->rows;
+}
+
+// Get number of cols
+template<typename T>
+unsigned int Matrix<T>::get_cols() const {
+    return this->cols;
+}
+
+template<typename T>
+void Matrix<T>::print(){
+  for (unsigned int i=0; i<this->get_rows(); i++) {
+      for (unsigned int j=0; j<this->get_cols(); j++) {
+          std::cout <<this->mat[i][j] << "\t";
+      }
+      std::cout << std::endl;
+  }
+}
 
 int main(int argc, char **argv) 
 {
@@ -8,6 +34,8 @@ int main(int argc, char **argv)
   using std::cout; 
   using std::endl;
 
+  create_plane(0,10,3,0,10,3);
+    
   // declare three 3x3 matrices of complex<long double> elements
   matrix<std::complex<long double> > m(3, 3), n(3, 3), o(3, 3);
 
@@ -26,7 +54,7 @@ int main(int argc, char **argv)
       o(r,c) = std::pow(n(r,c), 2);
     }
   }
-
+    
   // print to screen as demonstration
   cout << "m:" << endl;
   cout << m << endl;
@@ -40,4 +68,29 @@ int main(int argc, char **argv)
   cout << prod(m, n) << endl;
   cout << endl << "n * n - o:" << endl;
   cout << prod(n, n) - o << endl;
+}
+
+void create_plane(long double xmin, long double xmax, int xlen, long double ymin, long double ymax, int ylen) {
+    
+    using namespace boost::numeric::ublas;
+    using std::cout;
+    using std::endl;
+    
+    long double dx = (xmax-xmin)/(xlen-1);
+    long double dy = (ymax-ymin)/(ylen-1);
+    
+    matrix<std::complex<long double> > cplane(xlen, ylen);
+    
+    for (unsigned r = 0; r < cplane.size1(); r++) {
+        for (unsigned c = 0; c < cplane.size2(); c++) {
+            
+            cplane(r,c) =std::complex<long double>(xmin + c*dy, ymin + r*dy);
+            
+        }
+    }
+
+    Matrix<cplane>::print();
+    
+    cout << "cplane:" << endl;
+    cout << cplane << endl;
 }
