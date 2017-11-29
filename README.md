@@ -1,6 +1,6 @@
 # CS510 CW 13
 
-**Author(s):** **CHANGEME**
+**Author(s):** **Atabak, Chris, Cynthia **
 
 [![Build Status](https://travis-ci.org/chapman-cs510-2017f/cw-13-chris_atabak.svg?branch=master)](https://travis-ci.org/chapman-cs510-2017f/cw-13-chris_atabak)
 
@@ -35,7 +35,7 @@ Complete the following exercises, saving your solutions in the indicated files.
 
 Analyze in this section what you found useful about this assignment in your own words. Include any lingering questions or comments that you may have.
 
-**CHANGEME**
+**The most useful part of the assignment was learning about the C++ libraries. This made coding much easier and we are able to perform more complicated operations without coding it from scratch**
 
 ## Honor Pledge
 
@@ -46,4 +46,4 @@ I pledge that all the work in this repository is my own with only the following 
 
 Signed,
 
-**YOURNAME**
+**Atabak, Chris, Cynthia**
