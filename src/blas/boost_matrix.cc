@@ -1,31 +1,13 @@
 #include <boost/numeric/ublas/matrix.hpp>
 #include <boost/numeric/ublas/io.hpp>
-#include "matrix.h"
+
 
 
 void create_plane(long double xmin, long double xmax, int xlen, long double ymin, long double ymax, int ylen);
 
-// Get number of rows
-template<typename T>
-unsigned int Matrix<T>::get_rows() const {
-    return this->rows;
-}
 
-// Get number of cols
-template<typename T>
-unsigned int Matrix<T>::get_cols() const {
-    return this->cols;
-}
 
-template<typename T>
-void Matrix<T>::print(){
-  for (unsigned int i=0; i<this->get_rows(); i++) {
-      for (unsigned int j=0; j<this->get_cols(); j++) {
-          std::cout <<this->mat[i][j] << "\t";
-      }
-      std::cout << std::endl;
-  }
-}
+
 
 int main(int argc, char **argv) 
 {
@@ -89,8 +71,11 @@ void create_plane(long double xmin, long double xmax, int xlen, long double ymin
         }
     }
 
-    Matrix<cplane>::print();
-    
-    cout << "cplane:" << endl;
-    cout << cplane << endl;
+    for (unsigned int i=0; i<cplane.size1(); i++) {
+      for (unsigned int j=0; j<cplane.size2(); j++) {
+          std::cout <<cplane(i,j) << ", ";
+      }
+      std::cout << std::endl;
+    }
 }
+
